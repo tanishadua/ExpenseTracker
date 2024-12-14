@@ -10,7 +10,27 @@ const RecentTransactionList = ({expenseList,setBalance,setExpenseList,balance}) 
     const[editFlag,setEditFlag] = useState(false)
     const maximumRecords = 3;
     const[currentPage,setCurrentPage] = useState(1)
-    const[recentTransactions,setResetTransactions] = useState([])
+    const[recentTransactions,setRecentTransactions] = useState([])
+    const[lastPage,setLastPage] = useState(0)
+    useEffect(()=> {
+        //As and when expenseList is incremented the index for pagination is calculated as we only require to place the first 3 objects in the first page
+        const startIndex = currentPage*maximumRecords - maximumRecords
+        const endIndex =  Math.min(currentPage*maximumRecords,expenseList.length)
+        //show 3 transactions at first page
+        //can not directly edit the expense list
+        setRecentTransactions([...expenseList].slice(startIndex,endIndex))
+        //setting the value of last page which is total pages
+        setLastPage(Math.ceil(expenseList.length/maximumRecords))
+    },[currentPage,expenseList])
+
+    //Case when there is a change in the value of a lastpage or total pages i.e. when the expenseList is decremented by deletion from the recent transactions list
+    useEffect(() => {
+        //when the transactions are getting deleted then update the current page
+        if(lastPage < currentPage && currentPage > 1){
+            //simply go back
+            setCurrentPage(prev => prev-1)
+        }
+    },[lastPage])
 
     const handleDelete = (id) => {
         const itemToBeDeleted = expenseList.find((item)=> item.id === id)
@@ -31,11 +51,11 @@ const RecentTransactionList = ({expenseList,setBalance,setExpenseList,balance}) 
         { expenseList.length > 0 ? 
         <div>
             <div>
-                {expenseList.map((transaction)=>(
+                {recentTransactions.map((transaction)=>(
                     <TransactionListCard expensedata={transaction} key={transaction.id} handleDelete = { () => handleDelete(transaction.id)} handleEdit ={ ()=> handleEdit(transaction)}/>
                 ))}
             </div>
-            <Pagination currentPage={currentPage}/>
+            {lastPage > 1 && <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} lastPage={lastPage}/>}
         </div> :(
             <div className={styles.emptyTransactionWrapper}>
                 <p>No Transactions!</p>
