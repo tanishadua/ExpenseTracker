@@ -1,4 +1,4 @@
-import ExpenseTracker from "./ExpenseTracker";
+import ExpenseTracker from "./expenseTracker/ExpenseTracker";
 import { SnackbarProvider } from "notistack"
 function App() {
   return (

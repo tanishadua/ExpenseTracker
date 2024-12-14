@@ -1,0 +1,11 @@
+.barchart h2{
+    font-size: 30px;
+    color:#fff;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+.barcontainer{
+    background: #fff;
+    border-radius: 10px;
+    padding: 5px 20px;
+}

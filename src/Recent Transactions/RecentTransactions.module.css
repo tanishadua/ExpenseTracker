@@ -1,5 +1,11 @@
-.emptyTransactionWrapper{
+.list,.emptyTransactionWrapper{
     background: #fff;
     border-radius: 10px;
     padding:24px;
+}
+.transactionWrapper h2{
+    font-size: 30px;
+    color:#fff;
+    font-style: italic;
+    margin-bottom: 10px;
 }

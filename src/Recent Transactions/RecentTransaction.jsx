@@ -4,7 +4,7 @@ import styles from "./RecentTransactions.module.css"
 import {useRef,useState,useEffect} from "react"
 import Pagination from "../Pagination/pagination"
 
-const RecentTransactionList = ({expenseList,setBalance,setExpenseList,balance}) => {
+const RecentTransactionList = ({expenseList,setBalance,setExpenseList,balance,setExpense}) => {
     const dialogRefExpense = useRef(null)
     const[editedObj,setEditedObj] = useState(null)
     const[editFlag,setEditFlag] = useState(false)
@@ -37,6 +37,7 @@ const RecentTransactionList = ({expenseList,setBalance,setExpenseList,balance}) 
         const price = Number(itemToBeDeleted.price)
         setBalance((prev) => prev+price)
         setExpenseList((prev)=>prev.filter((item)=>item.id !== id))
+        setExpense(prev=>prev-price)
     }
     const handleEdit =(transObj) => {
         //simply pass the object of which the edit option is clicked
@@ -46,10 +47,10 @@ const RecentTransactionList = ({expenseList,setBalance,setExpenseList,balance}) 
         //when the edit option is clicked then the modal is opened
         dialogRefExpense.current?.showModal()
     }
-     return <div>
+     return <div className={styles.transactionWrapper}>
         <h2>Recent Transactions</h2>
         { expenseList.length > 0 ? 
-        <div>
+        <div className={styles.list}>
             <div>
                 {recentTransactions.map((transaction)=>(
                     <TransactionListCard expensedata={transaction} key={transaction.id} handleDelete = { () => handleDelete(transaction.id)} handleEdit ={ ()=> handleEdit(transaction)}/>
@@ -61,7 +62,7 @@ const RecentTransactionList = ({expenseList,setBalance,setExpenseList,balance}) 
                 <p>No Transactions!</p>
             </div>
         )} 
-        <AddExpenseModal ref={dialogRefExpense}  setEditedObject={setEditedObj} editedObject={editedObj} setEditFlag={setEditFlag} editFlag={editFlag} expenseList={expenseList} setExpenseList={setExpenseList} balance={balance} setBalance={setBalance} /> 
+        <AddExpenseModal ref={dialogRefExpense}  setEditedObject={setEditedObj} editedObject={editedObj} setEditFlag={setEditFlag} editFlag={editFlag} expenseList={expenseList} setExpenseList={setExpenseList} balance={balance} setBalance={setBalance} setExpense={setExpense}/> 
      </div>
      
 }

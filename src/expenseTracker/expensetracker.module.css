@@ -1,0 +1,73 @@
+.container{
+    background: var(--primary-bg-color);
+    padding:25px;
+    min-height: 100vh;
+}
+.container h1{
+    color: #fff;
+    margin-bottom: 10px;
+}
+.card{
+    background-color: var(--secondary-bg-color);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 45px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+}
+.cardTitle{
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.cardWrapper{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:35px;
+    padding:45px;
+    background: #626262;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+    margin-bottom: 30px;
+}
+
+.cardTitle span{
+    font-weight: 700;
+}
+.success{
+    color:#9dff58
+}
+.failure{
+    color:#f4bb4a
+}
+.successButton{
+    background: linear-gradient(90deg, #B5DC52, #89e148);
+    color:#fff;
+    border:0;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 15px;
+    padding:12px 30px;
+    cursor: pointer;
+}
+.failureButton{
+    background: linear-gradient(90deg,#ff9595, #ff4747, #ff3838);
+    color:#fff;
+    border:0;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 15px;
+    padding:12px 30px;
+    cursor: pointer;
+}
+.expenseListContainer{
+    display:grid;
+    gap:35px;
+    grid-template-columns: 2fr 1fr;
+}
+
